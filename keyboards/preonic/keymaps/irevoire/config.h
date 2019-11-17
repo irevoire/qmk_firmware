@@ -1,5 +1,7 @@
 #pragma once
 
+#define TAPPING_TOGGLE 1
+
 #ifdef AUDIO_ENABLE
     #define STARTUP_SONG SONG(PREONIC_SOUND)
     // #define STARTUP_SONG SONG(NO_SOUND)
@@ -22,6 +24,7 @@
 /* enable basic MIDI features:
    - MIDI notes can be sent when in Music mode is on
 */
+
 
 #define MIDI_BASIC
 
