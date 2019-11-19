@@ -1,6 +1,6 @@
 #pragma once
 
-#define TAPPING_TOGGLE 1
+#define TAPPING_TOGGLE 2
 
 #ifdef AUDIO_ENABLE
     #define STARTUP_SONG SONG(PREONIC_SOUND)
