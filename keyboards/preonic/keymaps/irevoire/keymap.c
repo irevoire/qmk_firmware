@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |  NO  |  NO  |  NO  |  NO  |  NO  |  NO  |  NO  |  NO  |  NO  |  NO  |  NO  |  NO  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | TRNS |record|StpRec|PlayRec|  NO |      NO     |Speed+|Speed-|  NO  |RESET |MUSIC |
+ * |TG(META)|record|StpRec|PlayRec|  NO |      NO     |Speed+|Speed-|  NO  |RESET |MUSIC |
  * `-----------------------------------------------------------------------------------'
  */
 [_META] = LAYOUT_preonic_grid( \
@@ -114,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,  \
   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,  \
   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,  \
-  _______,   KC_LCTL,   KC_LALT,   KC_LGUI,   XXXXXXX,   XXXXXXX,   XXXXXXX,     KC_UP,   KC_DOWN,   XXXXXXX,     RESET,   MU_TOG    \
+  TG(_META),   KC_LCTL,   KC_LALT,   KC_LGUI,   XXXXXXX,   XXXXXXX,   XXXXXXX,     KC_UP,   KC_DOWN,   XXXXXXX,     RESET,   MU_TOG    \
 ),
 
 };
