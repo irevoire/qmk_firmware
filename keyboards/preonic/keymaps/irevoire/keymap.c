@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,   KC_BRIU,   KC_P7,     KC_P8,     KC_P9,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LOCK,   XXXXXXX,   KC_VOLU,  \
   _______,   KC_BRID,   KC_P4,     KC_P5,     KC_P6,   XXXXXXX,   KC_CAPS,   KC_LEFT,   KC_DOWN,   KC_UP,     KC_RIGHT,  KC_VOLD,  \
   _______,   KC_PDOT,   KC_P1,     KC_P2,     KC_P3,     KC_P0,   XXXXXXX,   XXXXXXX, TG(_GAME),   XXXXXXX,   XXXXXXX,   KC_MUTE,  \
-  TG(_META),_______,  _______,   _______,   _______,   _______,   _______,   _______,   _______,   XXXXXXX,   XXXXXXX,   KC_ESC    \
+  TG(_META),_______,  _______,   _______, TG(_BASE),   _______,   _______,   _______,   _______,   XXXXXXX,   XXXXXXX,   KC_ESC    \
 ),
 
 /* Gaming
