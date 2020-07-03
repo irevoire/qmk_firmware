@@ -1,6 +1,8 @@
 #pragma once
 
 #define TAPPING_TOGGLE 3
+#define LEADER_TIMEOUT 300
+#define LEADER_PER_KEY_TIMING
 
 #ifdef AUDIO_ENABLE
     #define STARTUP_SONG SONG(PREONIC_SOUND)

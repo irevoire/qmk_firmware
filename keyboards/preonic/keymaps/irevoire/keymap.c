@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,   KC_BRIU,   KC_P7,     KC_P8,     KC_P9,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   KC_LOCK,   XXXXXXX,   KC_VOLU,  \
   _______,   KC_BRID,   KC_P4,     KC_P5,     KC_P6,   XXXXXXX,   KC_CAPS,   KC_LEFT,   KC_DOWN,   KC_UP,     KC_RIGHT,  KC_VOLD,  \
   _______,   KC_PDOT,   KC_P1,     KC_P2,     KC_P3,     KC_P0,   XXXXXXX,   XXXXXXX, TG(_GAME),   XXXXXXX,   XXXXXXX,   KC_MUTE,  \
-  _______,   _______,  _______,   _______,  _______,   _______,   _______,   _______,   _______,   XXXXXXX,   XXXXXXX,   KC_ESC    \
+  _______,   _______,  _______,   _______,  _______,   _______,   KC_LEAD,   _______,   _______,   XXXXXXX,   XXXXXXX,   KC_ESC    \
 ),
 
 /* Gaming
@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |  NO  |  NO  |  NO  |  NO  |  NO  |  NO  |  NO  |  NO  |  NO  |  NO  |  NO  |  NO  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |TG(META)|record|StpRec|PlayRec|  NO |      NO     |Speed+|Speed-|  NO  |RESET |MUSIC |
+ * |TG(META)|record|StpRec|PlayRec|  NO |    NO     |Speed+|Speed-|  NO  |RESET |MUSIC |
  * `-----------------------------------------------------------------------------------'
  */
 [_META] = LAYOUT_preonic_grid( \
@@ -114,7 +114,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,  \
   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,  \
   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,  \
-  TO(_META),   KC_LCTL,   KC_LALT,   KC_LGUI,   XXXXXXX,   XXXXXXX,   XXXXXXX,     KC_UP,   KC_DOWN,   XXXXXXX,     RESET,   MU_TOG    \
+  TO(_META), KC_LCTL,   KC_LALT,   KC_LGUI,   XXXXXXX,   XXXXXXX,   XXXXXXX,     KC_UP,   KC_DOWN,   XXXXXXX,     RESET,   MU_TOG    \
 ),
 
 };
+
+LEADER_EXTERNS();
+
+void matrix_scan_user(void) {
+	LEADER_DICTIONARY() {
+		SEQ_TWO_KEYS(KC_L, KC_L) {
+			reset_keyboard();
+		}
+	}
+}
