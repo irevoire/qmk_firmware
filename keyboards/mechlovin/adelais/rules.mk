@@ -18,5 +18,10 @@ MIDI_ENABLE = no            # MIDI support
 BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
 AUDIO_ENABLE = no           # Audio output on port C6
 FAUXCLICKY_ENABLE = no      # Use buzzer to emulate clicky switches
+<<<<<<< HEAD
+=======
+
+LAYOUTS = alice alice_split_bs
+>>>>>>> 9971caa6327274b230695afb4d76f83bf9b77f3a
 
 DEFAULT_FOLDER = mechlovin/adelais/standard_led/rev2
