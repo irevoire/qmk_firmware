@@ -160,6 +160,8 @@ static void render_kyria_logo(void) {
 
 #include "bongo_cat.h"
 
+extern size_t rust(void);
+
 void oled_task_user(void) {
     if (false && is_keyboard_master()) {
         //render_skull();
@@ -169,7 +171,7 @@ void oled_task_user(void) {
     } else {
         bongo_render_anim();
         oled_set_cursor(0,6);
-        sprintf(wpm_str, "       WPM: %03d", get_current_wpm());
+        sprintf(wpm_str, "       WPM: %03d", rust());
         oled_write(wpm_str, false);
 
     }

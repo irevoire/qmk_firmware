@@ -23,12 +23,13 @@ vpath %.h $(VPATH_SRC)
 vpath %.cpp $(VPATH_SRC)
 vpath %.cc $(VPATH_SRC)
 vpath %.hpp $(VPATH_SRC)
+# vpath %.rs $(VPATH_SRC)
 vpath %.S $(VPATH_SRC)
 VPATH :=
 
 # Convert all SRC to OBJ
 define OBJ_FROM_SRC
-$(patsubst %.c,$1/%.o,$(patsubst %.cpp,$1/%.o,$(patsubst %.cc,$1/%.o,$(patsubst %.S,$1/%.o,$(patsubst %.clib,$1/%.a,$($1_SRC))))))
+$(patsubst %.c,$1/%.o,$(patsubst %.cpp,$1/%.o,$(patsubst %.cc,$1/%.o,$(patsubst %.rs,$1/%.o,$(patsubst %.S,$1/%.o,$(patsubst %.clib,$1/%.a,$($1_SRC)))))))
 endef
 $(foreach OUTPUT,$(OUTPUTS),$(eval $(OUTPUT)_OBJ +=$(call OBJ_FROM_SRC,$(OUTPUT))))
 
@@ -130,6 +131,19 @@ endif
 CXXFLAGS += -Wa,-adhlns=$(@:%.o=%.lst)
 #CXXFLAGS += $(CSTANDARD)
 
+
+#---------------- Compiler Options rust ----------------
+#  -C debuginfo=*:      generate debugging information
+#  -C opt-level=*:      optimization level
+RUSTFLAGS += --emit=obj --codegen panic=abort
+RUSTFLAGS += --target thumbv7em-none-eabihf
+# RUSTFLAGS += --target --target avr-atmega328p.json
+RUSTFLAGS += --codegen debuginfo=1
+RUSTFLAGS += $(RUSTDEFS)
+RUSTFLAGS += -C opt-level=$(OPT)
+# to supress "warning: only initialized variables can be placed into program memory area"
+
+
 #---------------- Assembler Options ----------------
 #  -Wa,...:   tell GCC to pass this to the assembler.
 #  -adhlns:   create listing
@@ -214,6 +228,7 @@ GENDEPFLAGS = -MMD -MP -MF $(patsubst %.o,%.td,$@)
 # You can give extra flags at 'make' command line like: make EXTRAFLAGS=-DFOO=bar
 ALL_CFLAGS = $(MCUFLAGS) $(CFLAGS) $(EXTRAFLAGS)
 ALL_CXXFLAGS = $(MCUFLAGS) -x c++ $(CXXFLAGS) $(EXTRAFLAGS)
+ALL_RUSTFLAGS = $(RUSTFLAGS)
 ALL_ASFLAGS = $(MCUFLAGS) -x assembler-with-cpp $(ASFLAGS) $(EXTRAFLAGS)
 
 define NO_LTO
@@ -313,6 +328,7 @@ $1_CONFIG_FLAGS += $$(patsubst %,-include %,$$($1_CONFIG))
 endif
 $1_CFLAGS = $$(ALL_CFLAGS) $$($1_DEFS) $$($1_INCFLAGS) $$($1_CONFIG_FLAGS) $$(NOLTO_CFLAGS)
 $1_CXXFLAGS = $$(ALL_CXXFLAGS) $$($1_DEFS) $$($1_INCFLAGS) $$($1_CONFIG_FLAGS) $$(NOLTO_CFLAGS)
+$1_RUSTFLAGS = $$(ALL_RUSTFLAGS)
 $1_ASFLAGS = $$(ALL_ASFLAGS) $$($1_DEFS) $$($1_INCFLAGS) $$($1_CONFIG_FLAGS)
 
 # Compile: create object files from C source files.
@@ -335,6 +351,12 @@ $1/%.o : %.cc $1/%.d $1/cxxflags.txt $1/compiler.txt | $(BEGIN)
 	$$(eval CMD=$$(CC) -c $$($1_CXXFLAGS) $$(INIT_HOOK_CFLAGS) $$(GENDEPFLAGS) $$< -o $$@ && $$(MOVE_DEP))
 	@$$(BUILD_CMD)
 
+$1/%.o : %.rs
+	@mkdir -p $$(@D)
+	@$$(SILENT) || printf "$$(MSG_COMPILING_RUST) $$<" | $$(AWK_CMD)
+	$$(eval CMD=rustc $$($1_RUSTFLAGS) -o $$@ $$< && $$(MOVE_DEP))
+	@$$(BUILD_CMD)
+
 # Assemble: create object files from assembler source files.
 $1/%.o : %.S $1/asflags.txt $1/compiler.txt | $(BEGIN)
 	@mkdir -p $$(@D)
@@ -355,6 +377,9 @@ $1/cflags.txt: $1/force
 
 $1/cxxflags.txt: $1/force
 	echo '$$($1_CXXFLAGS)' | cmp -s - $$@ || echo '$$($1_CXXFLAGS)' > $$@
+
+$1/rustflags.txt: $1/force
+	echo '$$($1_RUSTFLAGS)' | cmp -s - $$@ || echo '$$($1_RUSTFLAGS)' > $$@
 
 $1/asflags.txt: $1/force
 	echo '$$($1_ASFLAGS)' | cmp -s - $$@ || echo '$$($1_ASFLAGS)' > $$@
