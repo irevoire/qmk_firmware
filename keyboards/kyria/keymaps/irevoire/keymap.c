@@ -159,15 +159,18 @@ static void render_kyria_logo(void) {
 #include "bongo_cat.h"
 
 void oled_task_user(void) {
-    if (is_keyboard_master()) {
+    if (false && is_keyboard_master()) {
         render_kyria_logo();
         oled_set_cursor(7,6);
      // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
         bongo_render_anim();
-        oled_set_cursor(0,6);
-        sprintf(wpm_str, "       WPM: %03d", get_current_wpm());
-        oled_write(wpm_str, false);
     }
 }
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+	keystroke_timestamp = timer_read32();
+	return true;
+}
+
 #endif

@@ -106,11 +106,6 @@ static const sized_ptr_t BASE_TO_TAP[2] = {
 
 #define ANIM_FRAME_DURATION 200 // how long each frame lasts in ms
 
-uint32_t anim_timer = 0;
-uint32_t anim_sleep = 0;
-uint8_t current_idle_frame = 0;
-uint8_t current_tap_frame = 0;
-
 /// in this function we'll uncompress the frame to the OLED buffer and undiff it with the base frame
 void render_compressed_frame(const sized_ptr_t ptr) {
 	const uint8_t *data = ptr.ptr;
@@ -147,39 +142,38 @@ void render_compressed_frame(const sized_ptr_t ptr) {
 	}
 }
 
+uint32_t keystroke_timestamp;
+
 static void animation_phase(void) {
-	if (get_current_wpm() <= IDLE_SPEED) {
-		current_idle_frame = (current_idle_frame + 1) % IDLE_FRAMES;
-		render_compressed_frame(BASE_TO_IDLE[current_idle_frame]);
-	}
-	else if (get_current_wpm() > IDLE_SPEED && get_current_wpm() < TAP_SPEED) {
-		render_compressed_frame(BASE_TO_PREP);
-	}
-	else if (get_current_wpm() >= TAP_SPEED) {
+	const uint32_t elapsed = timer_elapsed32(keystroke_timestamp);
+
+	if (elapsed < ANIM_FRAME_DURATION) {
+		static uint8_t current_tap_frame = 0;
+
 		current_tap_frame = (current_tap_frame + 1) % TAP_FRAMES;
 		render_compressed_frame(BASE_TO_TAP[current_tap_frame]);
 	}
-	else {
+	else if ((elapsed > ANIM_FRAME_DURATION) && (elapsed < 5 * ANIM_FRAME_DURATION)) {
 		render_compressed_frame(BASE_TO_PREP);
+	}
+	else {
+		static uint8_t current_idle_frame = 0;
+
+		current_idle_frame = (current_idle_frame + 1) % IDLE_FRAMES;
+		render_compressed_frame(BASE_TO_IDLE[current_idle_frame]);
 	}
 }
 
 void bongo_render_anim(void) {
-	if(get_current_wpm() != 000) {
-		oled_on(); // not essential but turns on animation OLED with any alpha keypress
+	static uint32_t anim_timer = 0;
+
+	if(timer_elapsed32(keystroke_timestamp) < OLED_TIMEOUT) {
+		oled_on();
 		if(timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
 			anim_timer = timer_read32();
 			animation_phase();
 		}
-		anim_sleep = timer_read32();
 	} else {
-		if(timer_elapsed32(anim_sleep) > OLED_TIMEOUT) {
-			oled_off();
-		} else {
-			if(timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
-				anim_timer = timer_read32();
-				animation_phase();
-			}
-		}
+		oled_off();
 	}
 }
