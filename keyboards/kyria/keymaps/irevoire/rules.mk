@@ -19,4 +19,4 @@ VELOCIKEY_ENABLE = no
 
 EXTRAFLAGS += -flto
 
-SRC += bongo_cat.c frame_manipulation.c
+SRC += bongo_cat.c

@@ -19,7 +19,7 @@
 
 #include "keymap_bepo.h"
 
-char wpm_str[10];
+char wpm_str[30];
 
 enum layers {
     _BEPO = 0,
@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BEPO] = LAYOUT(
       KC_TAB , BP_B   , BP_EA , BP_P   , BP_O   , BP_EG  ,                    /* */                    BP_DC  , BP_V   , BP_D   , BP_L   , BP_J   , BP_CCED ,
       KC_BSPC, BP_A   , BP_U  , BP_I   , BP_E   , BP_CO  ,                    /* */                    BP_C   , BP_T   , BP_S   , BP_R   , BP_N   , BP_M    ,
-      KC_RSFT, BP_AG  , BP_Y  , BP_X   , BP_DT  , BP_K   , KC_ESC  , LMSH_LWR,/* */ LMAL_LWR,MO_RAISE, BP_AP  , BP_Q   , BP_G   , BP_H   , BP_F   , KC_LSFT ,
+      KC_LSFT, BP_AG  , BP_Y  , BP_X   , BP_DT  , BP_K   , KC_ESC  , LMSH_LWR,/* */ LMAL_LWR,MO_RAISE, BP_AP  , BP_Q   , BP_G   , BP_H   , BP_F   , KC_RSFT ,
                                 KC_LGUI, KC_LCTL, KC_LALT, KC_SPACE, MO_LOWER,/* */ KC_RALT , KC_ENT , KC_ESC , BP_Z   , BP_W
     ),
 
@@ -88,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /*
  * Raise Layer:
- *                                                                                                                                                            
+ *
  *  ,----------------------------------------------------.                                            ,-----------------------------------------------------.
  *  |        |        |   7   |    8   |   9    |        |                                            |        |   F7   |   F8   |   F9   |  F10   |  F13   |
  *  |--------+--------+-------+--------+--------+--------|                                            |--------+--------+--------+--------+--------+--------|
@@ -107,10 +107,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, _______, KC_P1  , KC_P2  , KC_P3  , KC_P0  , _______, _______, /* */ _______, _______, _______, KC_F1  , KC_F2  , KC_F3  , KC_F12 ,  KC_F15 ,
                                  _______, _______, _______, _______, _______, /* */ _______, _______, _______, _______, _______
     ),
-    
-// /* 
+
+// /*
 //  * Template Layer:
-//  *                                                                                                                                                            
+//  *
 //  *  ,----------------------------------------------------.                                            ,-----------------------------------------------------.
 //  *  |        |        |       |        |        |        |                                            |        |        |        |        |        |        |
 //  *  |--------+--------+-------+--------+--------+--------|                                            |--------+--------+--------+--------+--------+--------|
@@ -121,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //  *                            |        |        |        |         |        |      |        |         |        |        |        |
 //  *                            |        |        |        |         |        |      |        |         |        |        |        |
 //  *                            `---------------------------------------------'      `---------------------------------------------'
-//  * 
+//  *
 //  */
 //    [_TEMPLATE] = LAYOUT(
 //       _______, _______, _______, _______, _______, _______,                   /* */                   _______, _______, _______, _______, _______, _______,
@@ -129,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //       _______, _______, _______, _______, _______, _______, _______, _______, /* */ _______, _______, _______, _______, _______, _______, _______, _______,
 //                                  _______, _______, _______, _______, _______, /* */ _______, _______, _______, _______, _______
 //     ),
-//    
+//
 };
 
 layer_state_t layer_state_set_user(layer_state_t state) {
@@ -141,7 +141,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 	return OLED_ROTATION_180;
 }
 
-/*
 static void render_kyria_logo(void) {
     static const char PROGMEM kyria_logo[] = {
         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,128,128,192,224,240,112,120, 56, 60, 28, 30, 14, 14, 14,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7, 14, 14, 14, 30, 28, 60, 56,120,112,240,224,192,128,128,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -155,23 +154,21 @@ static void render_kyria_logo(void) {
     };
     oled_write_raw_P(kyria_logo, sizeof(kyria_logo));
 }
-*/
 
 
 #include "bongo_cat.h"
 
 void oled_task_user(void) {
-    if (false && is_keyboard_master()) {
+    if (is_keyboard_master()) {
         //render_skull();
-        //oled_set_cursor(7,6);
-        // render_kyria_logo();
+        oled_set_cursor(7,6);
+        render_kyria_logo();
      // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
         bongo_render_anim();
         oled_set_cursor(0,6);
         sprintf(wpm_str, "       WPM: %03d", get_current_wpm());
         oled_write(wpm_str, false);
-
     }
 }
 #endif
