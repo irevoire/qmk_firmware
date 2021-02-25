@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include QMK_KEYBOARD_H
 
-#include "frame_manipulation.h"
-
 static const uint8_t PROGMEM BASE_FRAME[636] = {
 0, 0, 126, 126, 24, 60, 102, 66, 0, 12, 28, 112, 112, 28, 12, 0, 116, 116, 20,
 20, 124, 104, 0, 124, 124, 0, 112, 120, 44, 36, 124, 124, 0, 0, 0, 0, 0, 0, 0,

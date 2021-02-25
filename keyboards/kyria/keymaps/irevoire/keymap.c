@@ -160,9 +160,8 @@ static void render_kyria_logo(void) {
 
 void oled_task_user(void) {
     if (is_keyboard_master()) {
-        //render_skull();
-        oled_set_cursor(7,6);
         render_kyria_logo();
+        oled_set_cursor(7,6);
      // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
         bongo_render_anim();
