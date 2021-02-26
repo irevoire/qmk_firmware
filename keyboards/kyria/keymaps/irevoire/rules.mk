@@ -1,6 +1,6 @@
 OLED_DRIVER_ENABLE = yes   # Enables the use of OLED displays
 RGBLIGHT_ENABLE = yes      # Enable keyboard RGB underglow
-RGBLIGHT_ANIMATIONS = no
+RGBLIGHT_ANIMATIONS = yes
 WPM_ENABLE = yes
 ENCODER_ENABLE = no       # Enables the use of one or more encoders
 MOUSEKEY_ENABLE = no
