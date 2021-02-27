@@ -7,12 +7,12 @@ static const uint8_t PROGMEM BASE_FRAME[636] = {
 0, 0, 126, 126, 24, 60, 102, 66, 0, 12, 28, 112, 112, 28, 12, 0, 116, 116, 20,
 20, 124, 104, 0, 124, 124, 0, 112, 120, 44, 36, 124, 124, 0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 128, 0, 0, 0, 0, 0, 128, 64, 64, 32,
-32, 32, 32, 16, 16, 16, 16, 8, 4, 2, 1, 1, 2, 12, 48, 64, 128, 0, 0, 0, 0, 0,
+32, 32, 32, 16, 16, 16, 16, 8, 12, 2, 1, 1, 2, 12, 48, 64, 128, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 128, 128, 0, 0, 0, 0, 192,
 96, 48, 24, 12, 132, 198, 98, 35, 51, 17, 145, 113, 241, 113, 145, 17, 51, 35,
 98, 198, 132, 12, 24, 48, 96, 192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-0, 0, 0, 0, 30, 225, 0, 0, 1, 1, 2, 2, 1, 0, 0, 0, 0, 128, 128, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 30, 225, 0, 0, 3, 3, 2, 2, 1, 0, 0, 0, 0, 128, 128, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 128, 0, 48, 48, 0, 192, 193, 193, 194, 4, 8, 16, 32, 64, 128, 0,
 0, 0, 128, 128, 128, 128, 64, 64, 64, 64, 32, 32, 32, 32, 16, 16, 16, 16, 8,
 8, 8, 8, 8, 196, 4, 196, 4, 196, 2, 194, 2, 194, 1, 1, 1, 1, 0, 0, 0, 0, 0,
@@ -35,46 +35,44 @@ static const uint8_t PROGMEM BASE_FRAME[636] = {
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 8, 8, 23, 0, 15, 1, 2, 1, 15, 0, 15,
 2, 5, 8
 };
-#define IDLE4 BASE_FRAME
-static const uint8_t PROGMEM BASE_TO_IDLE1[36] = {
-51, 0, 2, 128, 16, 0, 131, 248, 252, 250, 2, 253, 130, 254, 4, 101, 0, 132, 6,
-125, 126, 254, 2, 255, 121, 0, 131, 192, 56, 8, 127, 0, 127, 0, 75, 0
+static const uint8_t PROGMEM IDLE1[36] = {
+51, 0, 2, 128, 16, 0, 131, 248, 4, 250, 2, 253, 130, 254, 4, 101, 0, 132, 6,
+125, 126, 254, 2, 1, 121, 0, 131, 192, 56, 8, 127, 0, 127, 0, 75, 0
 };
 // We want to repeat the next frame twice so we are going to make a fake IDLE2 frame
-#define BASE_TO_IDLE2 BASE_TO_IDLE1
-static const uint8_t PROGMEM BASE_TO_IDLE3[92] = {
-51, 0, 2, 128, 5, 0, 129, 128, 2, 192, 4, 224, 4, 240, 131, 248, 252, 254, 2,
-255, 133, 254, 244, 208, 192, 128, 98, 0, 130, 226, 31, 4, 255, 2, 254, 2,
-255, 3, 0, 2, 128, 9, 0, 130, 128, 0, 2, 208, 129, 0, 3, 63, 135, 62, 252,
+#define IDLE2 IDLE1
+static const uint8_t PROGMEM IDLE3[94] = {
+51, 0, 2, 128, 5, 0, 129, 128, 2, 192, 4, 224, 4, 240, 131, 248, 4, 254, 2,
+255, 133, 254, 244, 208, 192, 128, 98, 0, 130, 226, 31, 2, 255, 2, 1, 2, 254,
+2, 255, 3, 0, 2, 128, 9, 0, 130, 128, 0, 2, 208, 129, 0, 3, 63, 135, 62, 252,
 248, 240, 224, 192, 128, 90, 0, 130, 243, 253, 7, 0, 3, 244, 130, 242, 254, 3,
 0, 129, 255, 2, 254, 3, 255, 129, 254, 4, 0, 4, 255, 127, 0, 127, 0, 44, 0
 };
-// BASE_TO_IDLE4 frame is almost empty since IDLE4 is already used as the base
-static const uint8_t PROGMEM BASE_TO_IDLE4[12] = {
-127, 0, 127, 0, 127, 0, 127, 0, 127, 0, 129, 0
+static const uint8_t PROGMEM IDLE4[16] = {
+70, 0, 129, 8, 110, 0, 2, 2, 127, 0, 127, 0, 127, 0, 72, 0
 };
-static const uint8_t PROGMEM BASE_TO_IDLE5[29] = {
-51, 0, 2, 128, 17, 0, 130, 252, 254, 2, 255, 131, 0, 8, 248, 100, 0, 129, 2,
-5, 255, 127, 0, 127, 0, 127, 0, 72, 0
+static const uint8_t PROGMEM IDLE5[31] = {
+51, 0, 2, 128, 17, 0, 130, 4, 254, 2, 255, 131, 0, 8, 248, 100, 0, 129, 2, 3,
+255, 2, 1, 127, 0, 127, 0, 127, 0, 72, 0
 };
-static const uint8_t PROGMEM BASE_TO_PREP1[62] = {
-127, 0, 58, 0, 3, 128, 18, 0, 2, 192, 137, 224, 168, 254, 255, 223, 235, 63,
-246, 132, 93, 0, 137, 232, 250, 251, 104, 103, 136, 73, 144, 204, 2, 192, 130,
-0, 128, 13, 0, 2, 4, 2, 12, 3, 14, 130, 16, 14, 96, 0, 2, 2, 2, 4, 5, 8, 129,
-7, 127, 0, 58, 0
+static const uint8_t PROGMEM PREP1[68] = {
+70, 0, 129, 8, 110, 0, 2, 2, 2, 0, 3, 128, 18, 0, 2, 192, 137, 224, 168, 254,
+255, 223, 235, 63, 246, 132, 93, 0, 137, 232, 250, 251, 104, 103, 136, 73,
+144, 204, 2, 192, 130, 0, 128, 13, 0, 2, 4, 2, 12, 3, 14, 130, 16, 14, 96, 0,
+2, 2, 2, 4, 5, 8, 129, 7, 127, 0, 58, 0
 };
-static const uint8_t PROGMEM BASE_TO_TAP1[84] = {
-86, 0, 4, 8, 5, 0, 2, 128, 88, 0, 3, 128, 18, 0, 4, 192, 4, 0, 129, 253, 2,
-249, 133, 255, 0, 200, 196, 194, 3, 225, 130, 241, 244, 83, 0, 137, 232, 250,
-251, 104, 103, 136, 201, 144, 204, 2, 192, 130, 0, 128, 23, 0, 130, 196, 132,
-5, 4, 130, 196, 244, 61, 0, 129, 224, 24, 0, 2, 2, 2, 4, 5, 8, 129, 7, 26, 0,
-129, 255, 2, 253, 127, 0, 29, 0
+static const uint8_t PROGMEM TAP1[92] = {
+70, 0, 129, 8, 15, 0, 4, 8, 5, 0, 2, 128, 84, 0, 2, 2, 2, 0, 3, 128, 18, 0, 4,
+192, 4, 0, 129, 253, 2, 249, 133, 255, 0, 200, 196, 194, 3, 225, 130, 241,
+244, 83, 0, 137, 232, 250, 251, 104, 103, 136, 201, 144, 204, 2, 192, 130, 0,
+128, 23, 0, 130, 196, 132, 5, 4, 130, 196, 244, 61, 0, 129, 224, 24, 0, 2, 2,
+2, 4, 5, 8, 129, 7, 26, 0, 129, 255, 2, 253, 127, 0, 29, 0
 };
-static const uint8_t PROGMEM BASE_TO_TAP2[65] = {
-127, 0, 79, 0, 2, 192, 137, 224, 168, 254, 255, 223, 235, 63, 246, 132, 98, 0,
-4, 12, 17, 0, 2, 4, 2, 12, 3, 14, 130, 16, 14, 88, 0, 6, 136, 130, 200, 208,
-7, 0, 4, 128, 113, 0, 135, 208, 136, 132, 2, 1, 193, 249, 4, 0, 2, 1, 2, 129,
-132, 193, 194, 228, 232, 52, 0
+static const uint8_t PROGMEM TAP2[71] = {
+70, 0, 129, 8, 110, 0, 2, 2, 23, 0, 2, 192, 137, 224, 168, 254, 255, 223, 235,
+63, 246, 132, 98, 0, 4, 12, 17, 0, 2, 4, 2, 12, 3, 14, 130, 16, 14, 88, 0, 6,
+136, 130, 200, 208, 7, 0, 4, 128, 113, 0, 135, 208, 136, 132, 2, 1, 193, 249,
+4, 0, 2, 1, 2, 129, 132, 193, 194, 228, 232, 52, 0
 };
 
 typedef struct sized_ptr_s {
@@ -82,19 +80,19 @@ typedef struct sized_ptr_s {
 	const size_t  size;
 } sized_ptr_t;
 
-static const sized_ptr_t BASE_TO_IDLE[5] = {
-	{ BASE_TO_IDLE1, sizeof(BASE_TO_IDLE1) },
-	{ BASE_TO_IDLE2, sizeof(BASE_TO_IDLE2) },
-	{ BASE_TO_IDLE3, sizeof(BASE_TO_IDLE3) },
-	{ BASE_TO_IDLE4, sizeof(BASE_TO_IDLE4) },
-	{ BASE_TO_IDLE5, sizeof(BASE_TO_IDLE5) }
+static const sized_ptr_t IDLE[5] = {
+	{ IDLE1, sizeof(IDLE1) },
+	{ IDLE2, sizeof(IDLE2) },
+	{ IDLE3, sizeof(IDLE3) },
+	{ IDLE4, sizeof(IDLE4) },
+	{ IDLE5, sizeof(IDLE5) }
 };
 
-static const sized_ptr_t BASE_TO_PREP = { BASE_TO_PREP1, sizeof(BASE_TO_PREP1) };
+static const sized_ptr_t PREP = { PREP1, sizeof(PREP1) };
 
-static const sized_ptr_t BASE_TO_TAP[2] = {
-	{ BASE_TO_TAP1, sizeof(BASE_TO_TAP1) },
-	{ BASE_TO_TAP2, sizeof(BASE_TO_TAP2) }
+static const sized_ptr_t TAP[2] = {
+	{ TAP1, sizeof(TAP1) },
+	{ TAP2, sizeof(TAP2) }
 };
 
 // WPM-responsive animation stuff here
@@ -151,16 +149,16 @@ static void animation_phase(void) {
 		static uint8_t current_tap_frame = 0;
 
 		current_tap_frame = (current_tap_frame + 1) % TAP_FRAMES;
-		render_compressed_frame(BASE_TO_TAP[current_tap_frame]);
+		render_compressed_frame(TAP[current_tap_frame]);
 	}
 	else if ((elapsed > ANIM_FRAME_DURATION) && (elapsed < 5 * ANIM_FRAME_DURATION)) {
-		render_compressed_frame(BASE_TO_PREP);
+		render_compressed_frame(PREP);
 	}
 	else {
 		static uint8_t current_idle_frame = 0;
 
 		current_idle_frame = (current_idle_frame + 1) % IDLE_FRAMES;
-		render_compressed_frame(BASE_TO_IDLE[current_idle_frame]);
+		render_compressed_frame(IDLE[current_idle_frame]);
 	}
 }
 
