@@ -158,13 +158,39 @@ static void render_kyria_logo(void) {
 
 #include "bongo_cat.h"
 
+/*
+static void render_status(void) {
+    // Host Keyboard Layer Status
+    oled_write_P(PSTR("Layer: "), false);
+    switch (get_highest_layer(layer_state)) {
+        case _BEPO:
+            oled_write_P(PSTR("Bepo\n"), false);
+            break;
+        case _LOWER:
+            oled_write_P(PSTR("Lower\n"), false);
+            break;
+        case _RAISE:
+            oled_write_P(PSTR("Raise\n"), false);
+            break;
+        default:
+            oled_write_P(PSTR("Undefined\n"), false);
+    }
+
+    // Host Keyboard LED Status
+    uint8_t led_usb_state = host_keyboard_leds();
+    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_NUM_LOCK) ? PSTR("NUMLCK ") : PSTR("       "), false);
+    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK) ? PSTR("CAPLCK ") : PSTR("       "), false);
+    oled_write_P(IS_LED_ON(led_usb_state, USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);
+}
+*/
+
 void oled_task_user(void) {
-    if (false && is_keyboard_master()) {
-        render_kyria_logo();
-        oled_set_cursor(7,6);
-     // Renders the current keyboard state (layer, lock, caps, scroll, etc)
-    } else {
+    if (is_keyboard_master()) {
         bongo_render_anim();
+    } else {
+        render_kyria_logo();
+        // oled_set_cursor(7,6);
+	// render_status();
     }
 }
 
