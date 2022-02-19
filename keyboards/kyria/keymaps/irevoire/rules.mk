@@ -20,3 +20,4 @@ VELOCIKEY_ENABLE = no
 EXTRAFLAGS += -flto
 
 SRC += bongo_cat.c
+SRC += rust.c
