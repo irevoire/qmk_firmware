@@ -140,7 +140,7 @@ static void render_compressed_frame(const sized_ptr_t ptr) {
 	}
 }
 
-uint32_t keystroke_timestamp;
+uint32_t keystroke_timestamp = 0;
 
 static void animation_phase(void) {
 	const uint32_t elapsed = timer_elapsed32(keystroke_timestamp);
