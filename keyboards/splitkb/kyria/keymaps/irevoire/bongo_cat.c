@@ -105,7 +105,7 @@ static const sized_ptr_t TAP[2] = {
 #define ANIM_FRAME_DURATION 200 // how long each frame lasts in ms
 
 /// in this function we'll uncompress the frame to the OLED buffer and undiff it with the base frame
-void render_compressed_frame(const sized_ptr_t ptr) {
+static void render_compressed_frame(const sized_ptr_t ptr) {
 	const uint8_t *data = ptr.ptr;
 	const size_t len = ptr.size;
 
@@ -140,7 +140,7 @@ void render_compressed_frame(const sized_ptr_t ptr) {
 	}
 }
 
-uint32_t keystroke_timestamp;
+uint32_t keystroke_timestamp = 0;
 
 static void animation_phase(void) {
 	const uint32_t elapsed = timer_elapsed32(keystroke_timestamp);
