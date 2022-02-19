@@ -180,9 +180,10 @@ void oled_task_user(void) {
     if (is_keyboard_master()) {
         bongo_render_anim();
     } else {
-        render_kyria_logo();
+        rust_render_anim();
+        // render_kyria_logo();
         // oled_set_cursor(7,6);
-	// render_status();
+      	// render_status();
     }
 }
 

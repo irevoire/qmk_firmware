@@ -105,7 +105,7 @@ static const sized_ptr_t TAP[2] = {
 #define ANIM_FRAME_DURATION 200 // how long each frame lasts in ms
 
 /// in this function we'll uncompress the frame to the OLED buffer and undiff it with the base frame
-void render_compressed_frame(const sized_ptr_t ptr) {
+static void render_compressed_frame(const sized_ptr_t ptr) {
 	const uint8_t *data = ptr.ptr;
 	const size_t len = ptr.size;
 
