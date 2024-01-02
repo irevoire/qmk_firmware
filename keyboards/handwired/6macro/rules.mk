@@ -1,9 +1,3 @@
-# MCU name
-MCU = atmega32u2
-
-# Bootloader selection
-BOOTLOADER = atmel-dfu
-
 # Build Options
 #   change yes to no to disable
 #
@@ -22,7 +16,6 @@ RGB_MATRIX_DRIVER = WS2812
 BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality on B7 by default
 =======
 RGB_MATRIX_ENABLE = no     # Enable per-key coordinate based RGB effects. Do not enable with RGBlight
-RGB_MATRIX_DRIVER = WS2812
 BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 >>>>>>> 9971caa6327274b230695afb4d76f83bf9b77f3a
 RGBLIGHT_ENABLE = yes       # Enable keyboard RGB underglow

@@ -1,16 +1,3 @@
-# MCU name
-MCU = atmega32u4
-
-# Bootloader selection
-#   Teensy       halfkay
-#   Pro Micro    caterina
-#   Atmel DFU    atmel-dfu
-#   LUFA DFU     lufa-dfu
-#   QMK DFU      qmk-dfu
-#   ATmega32A    bootloadHID
-#   ATmega328P   USBasp
-BOOTLOADER = atmel-dfu
-
 # Build Options
 #   change yes to no to disable
 #
@@ -25,16 +12,4 @@ SLEEP_LED_ENABLE = no       # Breathing sleep LED during USB suspend
 NKRO_ENABLE = yes            # USB Nkey Rollover
 BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality on B7 by default
 RGBLIGHT_ENABLE = yes        # Enable keyboard RGB underglow
-MIDI_ENABLE = no            # MIDI support
-UNICODE_ENABLE = no         # Unicode
-BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
-AUDIO_ENABLE = no           # Audio output on port C6
-<<<<<<< HEAD
-FAUXCLICKY_ENABLE = no      # Use buzzer to emulate clicky switches
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 9c94de070a651c477ed8d65228af4255a35ea6aa
-
-LAYOUTS = alice alice_split_bs
->>>>>>> 9971caa6327274b230695afb4d76f83bf9b77f3a
+AUDIO_ENABLE = no           # Audio output

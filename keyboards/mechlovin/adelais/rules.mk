@@ -1,10 +1,3 @@
-# MCU name
-MCU = STM32F303
-BOARD = QMK_PROTON_C
-
-# Bootloader selection
-BOOTLOADER = stm32-dfu
-
 # Build Options
 #   change yes to no to disable
 #
@@ -27,7 +20,4 @@ FAUXCLICKY_ENABLE = no      # Use buzzer to emulate clicky switches
 =======
 >>>>>>> 9c94de070a651c477ed8d65228af4255a35ea6aa
 
-LAYOUTS = alice alice_split_bs
->>>>>>> 9971caa6327274b230695afb4d76f83bf9b77f3a
-
-DEFAULT_FOLDER = mechlovin/adelais/standard_led/rev2
+DEFAULT_FOLDER = mechlovin/adelais/standard_led/arm/rev2
